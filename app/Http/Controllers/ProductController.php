@@ -26,8 +26,13 @@ class ProductController extends Controller
             'price' => 'required|decimal:0,2',
             'description' => 'nullable',
         ]);
-
-        $newProduct = Product::create($data);
+        $product = new Product;
+        $product->name = $request->name;
+        $product->qty = $request->qty;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->save();
+        // $newProduct = Product::create($data);
         return redirect(route('product.index'));
     }
 
