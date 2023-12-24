@@ -36,11 +36,12 @@ class ProductController extends Controller
         return redirect(route('product.index'));
     }
 
-    public function edit(Product $product) {
+    public function edit($id) {
+        $product = Student::find($id);
         return view('products.edit', ['product' => $product]);
     }
 
-    public function update(Product $product, Request $request) {
+    public function update(Request $request, $id) {
         $data = $request->validate([
             'name' => 'required',
             'qty' => 'required|numeric',
@@ -48,13 +49,19 @@ class ProductController extends Controller
             'description' => 'nullable',
         ]);
 
-        $product->update($data);
+        $product = Student::find($id);
+        $product->name = $request->name;
+        $product->qty = $request->qty;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $student->update();
 
 
         return redirect(route('product.index'))-> with('success', 'Product Update Successfully');
     }
 
-    public function delete(Product $product) {
+    public function delete($id) {
+        $product = Product::find($id);
         $product->delete();
         return redirect(route('product.index'))->with('success', 'Product deleted Successfully');
     }

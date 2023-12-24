@@ -17,7 +17,7 @@
             @endforeach
         </ul>
     </div>
-    <form method="post" action="{{route('product.update', ['product' => $product])}}">
+    <form method="post" action="{{route('product.update', ['id' => $product->id])}}">
         @csrf
         @method('post')
         <div>
